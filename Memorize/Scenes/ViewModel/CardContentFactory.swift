@@ -18,7 +18,7 @@ protocol CardContentFactory {
 struct EmojiCardContentFactory: CardContentFactory {
     typealias CardContent = Emoji
     
-    let contents = ["👻", "🎃", "🕷"]
+    let contents: [CardContent] = generateEmojis()
     
     func createCardContent(at index: Int) -> CardContent {
         guard index < contents.count else {
@@ -26,5 +26,23 @@ struct EmojiCardContentFactory: CardContentFactory {
             return ""
         }
         return contents[index]
+    }
+    
+    private static func generateEmojis() -> [CardContent] {
+        var emojis = ["👻", "🎃", "🕷", "👹", "💀", "🕸", "👽", "🧟‍♂️", "🐺", "🍬"]
+        
+        let numberOfPairs = Int.random(in: 2...emojis.count)
+        var selectedEmojis: [CardContent] = []
+        
+        for _ in 0..<numberOfPairs {
+            guard let emoji = emojis.randomElement() else { break }
+            selectedEmojis.append(emoji)
+            guard let selectedIndex = emojis.firstIndex(of: emoji) else { break }
+            emojis.remove(at: selectedIndex)
+        }
+        
+        print("number of pairs: \(numberOfPairs)")
+        print(selectedEmojis)
+        return selectedEmojis
     }
 }

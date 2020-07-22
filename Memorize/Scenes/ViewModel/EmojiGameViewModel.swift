@@ -10,8 +10,9 @@ import Foundation
 
 typealias Emoji = String
 
-final class EmojiGameViewModel {
 
+
+final class EmojiGameViewModel {
     var cards: [MemoryGameModel<Emoji>.Card] {
         gameModel.cards
     }
@@ -26,3 +27,11 @@ final class EmojiGameViewModel {
         gameModel.choose(card: card)
     }
 }
+
+extension EmojiGameViewModel {
+    struct CardRow: Identifiable {
+        let id: Int
+        let cards: [MemoryGameModel<Emoji>.Card]
+    }
+}
+

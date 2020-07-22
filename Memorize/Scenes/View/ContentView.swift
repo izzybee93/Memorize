@@ -10,18 +10,22 @@ import SwiftUI
 
 struct ContentView: View {
     var viewModel: EmojiGameViewModel
-
+    
     var body: some View {
-        HStack {
-            ForEach(viewModel.cards) { card in
-                CardView(card: card).onTapGesture {
-                    self.viewModel.choose(card: card)
+        ScrollView {
+            VStack() {
+                ForEach(viewModel.cards) { card in
+                    CardView(card: card)
+                        .frame(width: 40, height: 50)
+                        .onTapGesture {
+                            self.viewModel.choose(card: card)
+                    }
                 }
+                .padding()
+                .foregroundColor(.orange)
+                .font(.body)
             }
         }
-        .padding()
-        .foregroundColor(.orange)
-        .font(.largeTitle)
     }
 }
 
@@ -35,7 +39,7 @@ struct CardView: View {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white)
                 RoundedRectangle(cornerRadius: 10, style: .circular)
-                    .stroke(lineWidth: 3)
+                    .stroke(lineWidth: 1)
                 Text(card.content)
             } else {
                 RoundedRectangle(cornerRadius: 10).fill(Color.orange)
