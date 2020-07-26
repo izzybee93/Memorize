@@ -25,11 +25,3 @@ final class EmojiGameViewModel: ObservableObject {
         gameModel.choose(card: card)
     }
 }
-
-extension EmojiGameViewModel {
-    struct CardRow: Identifiable {
-        let id: Int
-        let cards: [MemoryGameModel<Emoji>.Card]
-    }
-}
-

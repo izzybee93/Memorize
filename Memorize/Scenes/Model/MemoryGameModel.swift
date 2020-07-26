@@ -8,8 +8,21 @@
 
 import Foundation
 
-struct MemoryGameModel<CardContent> {
-    var cards: [Card] = []
+struct MemoryGameModel<CardContent> where CardContent: Equatable {
+    private(set) var cards: [Card] = []
+    
+    var faceUpCardIndex: Int? {
+        get {
+            let faceUpCards = cards.filter { $0.isFaceUp }
+            guard faceUpCards.count == 1 else { return nil }
+            return cards.firstIndex(of: faceUpCards.first!)
+        }
+        set {
+            cards.indices.forEach {
+                cards[$0].isFaceUp = $0 == newValue
+            }
+        }
+    }
     
     init(numberOfPairs: Int, cardContentFactory: (Int) -> CardContent) {
         for index in 0..<numberOfPairs {
@@ -21,16 +34,22 @@ struct MemoryGameModel<CardContent> {
     }
     
     mutating func choose(card: Card) {
-        let cardIndex = index(of: card)
-        cards[cardIndex].isFaceUp.toggle()
-    }
-    
-    private func index(of card: Card) -> Int {
-        let cardIndex = cards.firstIndex { $0 == card }
-        guard let index = cardIndex else {
-            fatalError("Card not found 🥀")
+        guard let chosenIndex = cards.index(of: card) else { return }
+        if
+            !cards[chosenIndex].isFaceUp,
+            !cards[chosenIndex].isMatched {
+            
+            if let potentialMatchIndex = faceUpCardIndex {
+                if cards[chosenIndex].content == cards[potentialMatchIndex].content {
+                    cards[chosenIndex].isMatched = true
+                    cards[potentialMatchIndex].isMatched = true
+                    print("Matched \(cards[chosenIndex]) \(cards[potentialMatchIndex])")
+                }
+                cards[chosenIndex].isFaceUp = true
+            } else {
+                faceUpCardIndex = chosenIndex
+            }
         }
-        return index
     }
 }
 
@@ -43,7 +62,7 @@ extension MemoryGameModel {
     }
 }
 
-extension MemoryGameModel.Card {
+extension MemoryGameModel.Card: Equatable {
     static func == (lhs: MemoryGameModel.Card, rhs: MemoryGameModel.Card) -> Bool {
         return lhs.id == rhs.id
     }

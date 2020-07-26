@@ -12,17 +12,15 @@ struct EmojiGameView: View {
     @ObservedObject var viewModel: EmojiGameViewModel
     
     var body: some View {
-        VStack() {
-            ForEach(viewModel.cards) { card in
-                CardView(card: card)
-                    .aspectRatio(2/3, contentMode: .fit)
-                    .onTapGesture {
-                        self.viewModel.choose(card: card)
-                }
-            }
-            .padding(10)
-            .foregroundColor(.orange)
+        Grid(viewModel.cards) { card in
+            CardView(card: card)
+                .aspectRatio(2/3, contentMode: .fit)
+                .onTapGesture {
+                    self.viewModel.choose(card: card)
+            }.padding(4)
         }
+        .padding(10)
+        .foregroundColor(.orange)
     }
 }
 
@@ -44,7 +42,9 @@ struct CardView: View {
                     .stroke(lineWidth: Constants.lineWidth)
                 Text(card.content)
             } else {
-                RoundedRectangle(cornerRadius: Constants.cornerRadius).fill(Color.orange)
+                if !card.isMatched {
+                    RoundedRectangle(cornerRadius: Constants.cornerRadius).fill(Color.orange)
+                }
             }
         }
         .font(.system(size: Constants.fontSize(for: size)))
