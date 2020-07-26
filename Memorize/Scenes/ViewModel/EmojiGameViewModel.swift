@@ -10,14 +10,12 @@ import Foundation
 
 typealias Emoji = String
 
-
-
-final class EmojiGameViewModel {
+final class EmojiGameViewModel: ObservableObject {
     var cards: [MemoryGameModel<Emoji>.Card] {
         gameModel.cards
     }
     
-    private var gameModel: MemoryGameModel<Emoji>
+    @Published private var gameModel: MemoryGameModel<Emoji>
     
     init(cardContentFactory: EmojiCardContentFactory = EmojiCardContentFactory()) {
         gameModel = MemoryGameModel<Emoji>(numberOfPairs: cardContentFactory.contents.count, cardContentFactory: cardContentFactory.createCardContent)

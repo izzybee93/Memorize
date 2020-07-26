@@ -20,8 +20,17 @@ struct MemoryGameModel<CardContent> {
         cards.shuffle()
     }
     
-    func choose(card: Card) {
-        print("card chosen \(card)")
+    mutating func choose(card: Card) {
+        let cardIndex = index(of: card)
+        cards[cardIndex].isFaceUp.toggle()
+    }
+    
+    private func index(of card: Card) -> Int {
+        let cardIndex = cards.firstIndex { $0 == card }
+        guard let index = cardIndex else {
+            fatalError("Card not found 🥀")
+        }
+        return index
     }
 }
 
@@ -31,5 +40,11 @@ extension MemoryGameModel {
         let content: CardContent
         var isFaceUp: Bool = false
         var isMatched: Bool = false
+    }
+}
+
+extension MemoryGameModel.Card {
+    static func == (lhs: MemoryGameModel.Card, rhs: MemoryGameModel.Card) -> Bool {
+        return lhs.id == rhs.id
     }
 }
