@@ -15,7 +15,7 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable {
         get {
             let faceUpCards = cards.filter { $0.isFaceUp }
             guard faceUpCards.count == 1 else { return nil }
-            return cards.firstIndex(of: faceUpCards.first!)
+            return cards.index(of: faceUpCards.first!)
         }
         set {
             cards.indices.forEach {
@@ -59,11 +59,5 @@ extension MemoryGameModel {
         let content: CardContent
         var isFaceUp: Bool = false
         var isMatched: Bool = false
-    }
-}
-
-extension MemoryGameModel.Card: Equatable {
-    static func == (lhs: MemoryGameModel.Card, rhs: MemoryGameModel.Card) -> Bool {
-        return lhs.id == rhs.id
     }
 }
