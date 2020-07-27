@@ -17,6 +17,10 @@ final class EmojiGameViewModel: ObservableObject {
         gameModel.cards
     }
     
+    var score: Int {
+        gameModel.score
+    }
+    
     @Published private var gameModel: MemoryGameModel<Emoji>
     
     init(theme: Theme) {

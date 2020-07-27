@@ -10,6 +10,7 @@ import Foundation
 
 struct MemoryGameModel<CardContent> where CardContent: Equatable {
     private(set) var cards: [Card] = []
+    private(set) var score: Int = 0
     
     var faceUpCardIndex: Int? {
         get {
@@ -35,6 +36,8 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable {
     
     mutating func choose(card: Card) {
         guard let chosenIndex = cards.index(of: card) else { return }
+        cards[chosenIndex].turnedOverCount += 1
+
         if
             !cards[chosenIndex].isFaceUp,
             !cards[chosenIndex].isMatched {
@@ -43,7 +46,12 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
+                    score += 2
                     print("Matched \(cards[chosenIndex]) \(cards[potentialMatchIndex])")
+                } else {
+                    if cards[chosenIndex].turnedOverCount > 1 {
+                        score -= 1
+                    }
                 }
                 cards[chosenIndex].isFaceUp = true
             } else {
@@ -59,5 +67,6 @@ extension MemoryGameModel {
         let content: CardContent
         var isFaceUp: Bool = false
         var isMatched: Bool = false
+        var turnedOverCount: Int = 0
     }
 }

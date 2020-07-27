@@ -13,7 +13,7 @@ struct EmojiGameView: View {
     
     var body: some View {
         VStack {
-            HeaderView(title: viewModel.theme.rawValue.capitalized) {
+            HeaderView(title: viewModel.theme.rawValue.capitalized, score: viewModel.score) {
                 self.viewModel.startNewGame()
             }
             Spacer()
