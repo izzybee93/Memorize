@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct GridLayout {
-    var size: CGSize
+    private(set) var size: CGSize
     let rowCount: Int
     let columnCount: Int
     

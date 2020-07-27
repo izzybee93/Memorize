@@ -9,17 +9,17 @@
 import SwiftUI
 
 struct HeaderView: View {
-    var title: String
-    var score: Int
-    var onTapButton: () -> Void
+    let title: String
+    let score: Int
+    let onTapButton: () -> Void
     
     var body: some View {
         HStack {
             Text(title)
                 .padding(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
-            Spacer()
+            Spacer(minLength: 8)
             Text("Score: \(score)")
-            Spacer()
+            Spacer(minLength: 8)
             Button(action: {
                 self.onTapButton()
             }, label: {

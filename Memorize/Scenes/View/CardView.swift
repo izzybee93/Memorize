@@ -9,39 +9,32 @@
 import SwiftUI
 
 struct CardView: View {
-    var card: MemoryGameModel<Emoji>.Card
-    var color: Color
+    let card: MemoryGameModel<Emoji>.Card
+    let color: Color
     
     var body: some View {
         GeometryReader { geometry in
-            self.body(for: geometry.size)
+            if self.card.isFaceUp || !self.card.isMatched {
+                self.body(for: geometry.size)
+            }
         }
     }
     
     private func body(for size: CGSize) -> some View {
-        ZStack {
-            if card.isFaceUp {
-                RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                    .fill(Color.white)
-                RoundedRectangle(cornerRadius: Constants.cornerRadius, style: .circular)
-                    .stroke(lineWidth: Constants.lineWidth)
-                Text(card.content)
-            } else {
-                if !card.isMatched {
-                    RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                        .fill(RadialGradient(gradient: Gradient.init(colors: [.purple, color]), center: .center, startRadius: 2, endRadius: 70))
-                }
-            }
+        return ZStack {
+            Pie(startAngle: Angle(degrees: -90), endAngle: Angle(degrees: 20), clockwise: true)
+                .padding(3)
+                .opacity(0.2)
+            Text(card.content)
+                .font(.system(size: Constants.fontSize(for: size)))
         }
-        .font(.system(size: Constants.fontSize(for: size)))
+        .cardify(isFaceUp: card.isFaceUp, color: color)
     }
 }
 
 private extension CardView {
     enum Constants {
-        static let cornerRadius: CGFloat = 10
-        static let lineWidth: CGFloat = 1
-        private static let fontScaleFactor: CGFloat = 0.75
+        private static let fontScaleFactor: CGFloat = 0.7
 
         static func fontSize(for availableSize: CGSize) -> CGFloat {
             min(availableSize.width, availableSize.height) * self.fontScaleFactor

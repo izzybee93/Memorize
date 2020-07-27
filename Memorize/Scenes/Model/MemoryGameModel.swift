@@ -12,7 +12,7 @@ struct MemoryGameModel<CardContent> where CardContent: Equatable {
     private(set) var cards: [Card] = []
     private(set) var score: Int = 0
     
-    var faceUpCardIndex: Int? {
+    private var faceUpCardIndex: Int? {
         get {
             let faceUpCards = cards.filter { $0.isFaceUp }
             guard faceUpCards.count == 1 else { return nil }
