@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CardView: View {
     var card: MemoryGameModel<Emoji>.Card
+    var color: Color
     
     var body: some View {
         GeometryReader { geometry in
@@ -27,7 +28,8 @@ struct CardView: View {
                 Text(card.content)
             } else {
                 if !card.isMatched {
-                    RoundedRectangle(cornerRadius: Constants.cornerRadius).fill(Color.orange)
+                    RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                        .fill(RadialGradient(gradient: Gradient.init(colors: [.purple, color]), center: .center, startRadius: 2, endRadius: 70))
                 }
             }
         }
@@ -50,8 +52,8 @@ private extension CardView {
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-        CardView(card: MemoryGameModel<Emoji>.Card(id: 0, content: "🍄", isFaceUp: false))
-        CardView(card: MemoryGameModel<Emoji>.Card(id: 0, content: "🍄", isFaceUp: true))
-        }
+            CardView(card: MemoryGameModel<Emoji>.Card(id: 0, content: "🍄", isFaceUp: false), color: .purple)
+            CardView(card: MemoryGameModel<Emoji>.Card(id: 0, content: "🍄", isFaceUp: true), color: .purple)
+        }.frame(width: 100, height: 200, alignment: .center)
     }
 }
