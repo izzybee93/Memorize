@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4317D26524CEF7C8009A86B3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317D26424CEF7C8009A86B3 /* CardView.swift */; };
+		4317D26724CEF996009A86B3 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4317D26624CEF996009A86B3 /* HeaderView.swift */; };
 		4344A70E24CDDCE6005963B9 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344A70D24CDDCE6005963B9 /* Grid.swift */; };
 		4344A71124CDE3A1005963B9 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344A71024CDE3A1005963B9 /* GridLayout.swift */; };
 		4344A71424CDE6E7005963B9 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4344A71324CDE6E7005963B9 /* Array+Extension.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4317D26424CEF7C8009A86B3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		4317D26624CEF996009A86B3 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		4344A70D24CDDCE6005963B9 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		4344A71024CDE3A1005963B9 /* GridLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		4344A71324CDE6E7005963B9 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 			children = (
 				4344A70F24CDE38D005963B9 /* Grid */,
 				43A7218524C86E7600082472 /* EmojiGameView.swift */,
+				4317D26424CEF7C8009A86B3 /* CardView.swift */,
+				4317D26624CEF996009A86B3 /* HeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -302,8 +308,10 @@
 				43A7218424C86E7600082472 /* SceneDelegate.swift in Sources */,
 				43A721AF24C88F9600082472 /* CardContentFactory.swift in Sources */,
 				4344A71424CDE6E7005963B9 /* Array+Extension.swift in Sources */,
+				4317D26524CEF7C8009A86B3 /* CardView.swift in Sources */,
 				43A721A424C886DE00082472 /* MemoryGameModel.swift in Sources */,
 				43A7218624C86E7600082472 /* EmojiGameView.swift in Sources */,
+				4317D26724CEF996009A86B3 /* HeaderView.swift in Sources */,
 				4344A70E24CDDCE6005963B9 /* Grid.swift in Sources */,
 				43A721AD24C888C400082472 /* EmojiGameViewModel.swift in Sources */,
 				4344A71124CDE3A1005963B9 /* GridLayout.swift in Sources */,

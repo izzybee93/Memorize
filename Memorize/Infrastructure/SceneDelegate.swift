@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
 
-        let emojiGameViewModel = EmojiGameViewModel()
+        let emojiGameViewModel = EmojiGameViewModel(theme: Theme.random)
         let contentView = EmojiGameView(viewModel: emojiGameViewModel)
 
         // Use a UIHostingController as window root view controller.
