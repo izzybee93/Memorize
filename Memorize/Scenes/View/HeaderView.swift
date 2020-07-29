@@ -16,12 +16,14 @@ struct HeaderView: View {
     var body: some View {
         HStack {
             Text(title)
-                .padding(EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20))
-            Spacer(minLength: 8)
+                .padding(Constants.titleInsets)
+            Spacer(minLength: Constants.minSpacing)
             Text("Score: \(score)")
-            Spacer(minLength: 8)
+            Spacer(minLength: Constants.minSpacing)
             Button(action: {
-                self.onTapButton()
+                withAnimation(.easeInOut(duration: Constants.animationDuration)) {
+                    self.onTapButton()
+                }
             }, label: {
                 Text("New Game")
                     .padding(8)
@@ -29,9 +31,19 @@ struct HeaderView: View {
                     .foregroundColor(.white)
                 })
                 .font(.footnote)
-                .cornerRadius(10)
-                .padding(20)
+                .cornerRadius(Constants.buttonCornerRadius)
+                .padding(Constants.buttonPadding)
         }
+    }
+}
+
+private extension HeaderView {
+    enum Constants {
+        static let titleInsets = EdgeInsets(top: 8, leading: 20, bottom: 8, trailing: 20)
+        static let minSpacing: CGFloat = 8
+        static let buttonPadding: CGFloat = 20
+        static let buttonCornerRadius: CGFloat = 10
+        static let animationDuration = 0.6
     }
 }
 

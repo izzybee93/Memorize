@@ -78,6 +78,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4317D26C24D1CA74009A86B3 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				4317D26424CEF7C8009A86B3 /* CardView.swift */,
+				4317D26A24CF301B009A86B3 /* Cardify.swift */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
 		4344A70F24CDE38D005963B9 /* Grid */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,12 +155,11 @@
 		43A721A524C886E700082472 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4317D26C24D1CA74009A86B3 /* Card */,
 				4344A70F24CDE38D005963B9 /* Grid */,
 				43A7218524C86E7600082472 /* EmojiGameView.swift */,
-				4317D26424CEF7C8009A86B3 /* CardView.swift */,
 				4317D26624CEF996009A86B3 /* HeaderView.swift */,
 				4317D26824CF2834009A86B3 /* Pie.swift */,
-				4317D26A24CF301B009A86B3 /* Cardify.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

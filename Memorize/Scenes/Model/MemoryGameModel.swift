@@ -65,8 +65,59 @@ extension MemoryGameModel {
     struct Card: Identifiable {
         var id: Int
         let content: CardContent
-        var isFaceUp: Bool = false
-        var isMatched: Bool = false
         var turnedOverCount: Int = 0
+        
+        var isFaceUp: Bool = false {
+            didSet {
+                isFaceUp ? startUsingBonusTime() : stopUsingBonusTime()
+            }
+        }
+        
+        var isMatched: Bool = false {
+            didSet {
+                stopUsingBonusTime()
+            }
+        }
+        
+        // MARK: Bonus time
+        
+        var bonusTimeLimit: TimeInterval = 6
+        var lastFaceUpDate: Date?
+        var pastFaceUpTime: TimeInterval = 0
+        
+        var bonusTimeRemaining: TimeInterval {
+            max(0, bonusTimeLimit - faceUpTime)
+        }
+        
+        var bonusRemaining: Double {
+            (bonusTimeLimit > 0 && bonusTimeRemaining > 0) ? bonusTimeRemaining/bonusTimeLimit : 0
+        }
+        
+        var hasEarnedBonus: Bool {
+            isMatched && bonusTimeRemaining > 0
+        }
+        
+        var isConsumingBonusTime: Bool {
+            isFaceUp && !isMatched && bonusTimeRemaining > 0
+        }
+        
+        private var faceUpTime: TimeInterval {
+            if let lastFaceUp = lastFaceUpDate {
+                return pastFaceUpTime + Date().timeIntervalSince(lastFaceUp)
+            } else {
+                return pastFaceUpTime
+            }
+        }
+        
+        private mutating func startUsingBonusTime() {
+            if isConsumingBonusTime, lastFaceUpDate == nil {
+                lastFaceUpDate = Date()
+            }
+        }
+        
+        private mutating func stopUsingBonusTime() {
+            pastFaceUpTime = faceUpTime
+            lastFaceUpDate = nil
+        }
     }
 }

@@ -25,7 +25,9 @@ struct EmojiGameView: View {
                 CardView(card: card, color: self.themeColor)
                     .aspectRatio(2/3, contentMode: .fit)
                     .onTapGesture {
-                        self.viewModel.choose(card: card)
+                        withAnimation(.linear(duration: 0.4)) {
+                            self.viewModel.choose(card: card)
+                        }
                 }.padding(4)
             }
             .padding(10)
